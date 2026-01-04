@@ -1,10 +1,23 @@
 package bitutil
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type BitArray struct {
 	data []byte
 	bits uint64
+}
+
+func NewBitArrayFromBytes(b []byte) *BitArray {
+	data := make([]byte, len(b))
+	copy(data, b)
+
+	return &BitArray{
+		data: data,
+		bits: uint64(len(b)) * 8,
+	}
 }
 
 func (b *BitArray) Length() uint64 {
@@ -45,7 +58,11 @@ func (b *BitArray) GetBit(index uint64) (bool, error) {
 
 func (b *BitArray) ToUint32Array() ([]uint32, error) {
 	if b.bits%32 != 0 {
-		return nil, errors.New("bit length not divisible by 32")
+		return nil, fmt.Errorf(
+			"bit length not divisible by 32: bits=%d (mod 32 = %d)",
+			b.bits,
+			b.bits%32,
+		)
 	}
 
 	count := b.bits / 32
