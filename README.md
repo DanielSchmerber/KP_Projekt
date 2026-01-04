@@ -1,3 +1,8 @@
+# Daniel Schmerber MD5-Hash comparison 
+
+This is a small CLI tool, to create MD5 hashes of either Strings or Files.
+
+
 # Gleam
 
 ## Requirements:
@@ -16,3 +21,18 @@ gleam build
 gleam run -m gleescript
 Run Standalone escript md5
 
+# Go
+
+## Requirements:
+Go (https://go.dev/dl/)
+
+## Run Project:
+Download Dependencies (if missing): go mod download
+Run: go run .
+
+## Test Project:
+Test: go test ./...
+
+## Build Project:
+go build
+Run Binary: ./<binary-name>
