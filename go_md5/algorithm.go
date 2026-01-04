@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/binary"
+	"encoding/hex"
 	"errors"
-	"fmt"
 	"go_md5/bitutil"
 	"math"
 )
@@ -93,31 +93,35 @@ func Md5(array *bitutil.BitArray) (string, error) {
 
 	}
 
-	return fmt.Sprintf("%08x%08x%08x%08x\n", a0, b0, c0, d0), nil
+	digest := make([]byte, 16)
+
+	binary.LittleEndian.PutUint32(digest[0:4], a0)
+	binary.LittleEndian.PutUint32(digest[4:8], b0)
+	binary.LittleEndian.PutUint32(digest[8:12], c0)
+	binary.LittleEndian.PutUint32(digest[12:16], d0)
+
+	return hex.EncodeToString(digest), nil
 }
 
 func preprocessBytes(bitArray *bitutil.BitArray) *bitutil.BitArray {
+	ba := bitArray.Clone()
 
-	byteArray := bitArray.Clone()
+	origLen := ba.Length()
 
-	//Append a 1 at the end
-	byteArray.AppendBit(true)
+	ba.AppendBit(true)
 
-	messageLength := byteArray.Length()
-
-	messageLengthbuf := make([]byte, 8)
-	binary.LittleEndian.PutUint64(messageLengthbuf, messageLength)
-
-	var requiredPaddingBits = (448 - (messageLength % 512)) % 512
-	requiredPaddingBits = (requiredPaddingBits + 512) % 512
-
-	for i := uint64(0); i < requiredPaddingBits; i++ {
-		byteArray.AppendBit(false)
+	curLen := ba.Length()
+	padZeros := (448 - (curLen % 512) + 512) % 512
+	for i := uint64(0); i < padZeros; i++ {
+		ba.AppendBit(false)
 	}
 
-	for _, v := range messageLengthbuf {
-		byteArray.AppendByte(v)
+	lenBuf := make([]byte, 8)
+	binary.LittleEndian.PutUint64(lenBuf, origLen)
+
+	for _, v := range lenBuf {
+		ba.AppendByte(v)
 	}
 
-	return &byteArray
+	return &ba
 }
