@@ -21,6 +21,10 @@ gleam build
 gleam run -m gleescript
 Run Standalone escript md5
 
+## Benchmark Project
+
+Run the cli with the --benchmark flag
+
 # Go
 
 ## Requirements:
@@ -31,8 +35,11 @@ Download Dependencies (if missing): go mod download
 Run: go run .
 
 ## Test Project:
-Test: go test ./...
+go test ./...
 
 ## Build Project:
 go build
 Run Binary: ./<binary-name>
+
+## Benchmark Project:
+go test -bench .

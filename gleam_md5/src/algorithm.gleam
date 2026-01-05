@@ -165,6 +165,9 @@ fn inner_step(i, k_i, messages, a, b, c, d) {
   #(a, b, c, d)
 }
 
+//Gleam uses Linked lists for arrays
+//Gleam usually doesnt support indexed lookups, because the are O(n)
+//external libraries like gleam_array that use plattform specific implementations could be used, to speed this up
 fn get(arr, index) {
   case index, arr {
     0, [el, ..] -> Ok(el)
