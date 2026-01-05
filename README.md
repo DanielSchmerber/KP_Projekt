@@ -28,7 +28,7 @@ The flow of the programm can be visualized like this
 # Gleam
 
 ## Requirements:
-Gleam (https://gleam.run/getting-started/installing/)
+Gleam version >=1.13.0 (https://gleam.run/getting-started/installing/)
 ErlangVM
 
 ## Run Project:
