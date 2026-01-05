@@ -1,0 +1,34 @@
+name: Gleam CI
+
+on:
+  push:
+    paths:
+      - "gleam-md5/**"
+      - ".github/workflows/gleam.yml"
+  pull_request:
+    paths:
+      - "gleam-md5/**"
+
+jobs:
+  gleam:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gleam_md5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Gleam
+        uses: gleam-lang/setup-gleam@v1
+        with:
+          gleam-version: "latest"
+
+      - name: Install deps
+        run: gleam deps download
+
+      - name: Build
+        run: gleam build
+
+      - name: Test
+        run: gleam test

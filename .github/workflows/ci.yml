@@ -1,0 +1,12 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  gleam:
+    uses: ./.github/workflows/gleam.yml
+
+  go:
+    uses: ./.github/workflows/go.yml

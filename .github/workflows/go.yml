@@ -1,0 +1,32 @@
+name: Go CI
+
+on:
+  push:
+    paths:
+      - "go_md5/**"
+      - ".github/workflows/go.yml"
+  pull_request:
+    paths:
+      - "go-app/**"
+
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go_md5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+          cache-dependency-path: go-app/go.sum
+
+      - name: Build
+        run: go build ./...
+
+      - name: Test
+        run: go test ./...
