@@ -36,12 +36,12 @@ Download Dependencies (if missing): gleam deps download
 Run : gleam run
 
 ## Test Project:
-Test: gleam test
+- gleam test
 
 ## Build Project
-gleam build
-gleam run -m gleescript
-Run Standalone escript md5
+- gleam build
+- gleam run -m gleescript
+- Run Standalone: escript md5
 
 ## Benchmark Project
 
@@ -50,18 +50,18 @@ Run the cli with the --benchmark flag
 # Go
 
 ## Requirements:
-Go (https://go.dev/dl/)
+- Go (https://go.dev/dl/)
 
 ## Run Project:
-Download Dependencies (if missing): go mod download
-Run: go run .
+- Download Dependencies (if missing): go mod download
+- Run: go run .
 
 ## Test Project:
-go test ./...
+- go test ./...
 
 ## Build Project:
-go build
-Run Binary: ./<binary-name>
+- go build
+- Run Binary: ./<binary-name>
 
 ## Benchmark Project:
-go test -bench .
+- go test -bench .
