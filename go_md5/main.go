@@ -59,10 +59,10 @@ func main() {
 
 func printHelpText() {
 	println("Usages:")
-	println("  -s, --string <string>     Convert string to MD5")
-	println("  -f, --file <file>         Convert file contents to MD5")
-	println("  -h, --help                Print this help message")
-	println("  -i, --interactive         Start interactive mode")
+	println("  -s=\"string\"       Convert string to md5")
+	println("  -f=\"file path\"    Convert file path to md5")
+	println("  -h                  Prints help message")
+	println("  -i                  Start interactive mode")
 }
 
 func startInteractiveMode() {
