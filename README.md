@@ -2,6 +2,9 @@
 
 This is a small CLI tool, to create MD5 hashes of either Strings or Files.
 
+Usage: 
+    -s <string> -> returns the MD5 hash of the passed string
+    -f <path> -> returns the MD5 hash of a given file
 
 # Gleam
 
