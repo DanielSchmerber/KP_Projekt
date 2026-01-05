@@ -2,6 +2,7 @@ import algorithm
 import argv
 import gleam/bit_array
 import gleam/io
+import gleam/list
 import gleam/string
 import gleamy/bench
 import input
@@ -56,12 +57,15 @@ pub fn main() {
 }
 
 pub fn print_help_text() {
-  io.println("Usages:")
-  io.println("  -s, --string <string>     Convert string to MD5")
-  io.println("  -f, --file <file>         Convert file contents to MD5")
-  io.println("  -b, --benchmark           Run benchmarks")
-  io.println("  -i, --interactive         Start interactive mode")
-  io.println("  -h, --help                Show this help message")
+  [
+    "Usages:",
+    "  -s, --string <string>     Convert string to MD5",
+    "  -f, --file <file>         Convert file contents to MD5",
+    "  -b, --benchmark           Run benchmarks",
+    "  -i, --interactive         Start interactive mode",
+    "  -h, --help                Show this help message",
+  ]
+  |> list.each(io.println)
 }
 
 fn start_interactive_mode() {
