@@ -3,11 +3,11 @@ name: Gleam CI
 on:
   push:
     paths:
-      - "gleam-md5/**"
+      - "gleam_md5/**"
       - ".github/workflows/gleam.yml"
   pull_request:
     paths:
-      - "gleam-md5/**"
+      - "gleam_md5/**"
 
 jobs:
   gleam:
