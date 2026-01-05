@@ -22,4 +22,4 @@ jobs:
 
       - name: Run Gleam tests
         working-directory: gleam_md5
-        run: gleam test
+        run: gleam deps download && gleam test
