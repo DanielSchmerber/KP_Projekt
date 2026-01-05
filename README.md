@@ -1,7 +1,8 @@
 # Daniel Schmerber MD5-Hash comparison 
 
 This is a small CLI tool, to create MD5 hashes of either Strings or Files.
-
+[![Gleam CI](https://github.com/DanielSchmerber/KP_Projekt/actions/workflows/gleam.yml/badge.svg)](https://github.com/DanielSchmerber/KP_Projekt/actions/workflows/gleam.yml)
+[![Go CI](https://github.com/DanielSchmerber/KP_Projekt/actions/workflows/go.yml/badge.svg)](https://github.com/DanielSchmerber/KP_Projekt/actions/workflows/go.yml)
 # Usage: 
     -s <string> -> returns the MD5 hash of the passed string
     -f <path> -> returns the MD5 hash of a given file
