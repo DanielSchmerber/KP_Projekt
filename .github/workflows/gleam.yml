@@ -18,7 +18,7 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
           otp-version: '27'
-          gleam-version: '1.11.0'
+          gleam-version: '1.13.0'
 
       - name: Run Gleam tests
         working-directory: gleam_md5
