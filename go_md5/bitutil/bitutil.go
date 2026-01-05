@@ -99,3 +99,6 @@ func (b *BitArray) Clone() BitArray {
 	copyData := append([]bool(nil), b.data...)
 	return BitArray{data: copyData}
 }
+func LeftRotate(x uint32, c uint32) uint32 {
+	return (x << c) | (x >> (32 - c))
+}

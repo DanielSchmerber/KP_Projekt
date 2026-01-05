@@ -1,4 +1,5 @@
-import bitutil
+import bitutil.{add32, leftrotate_32bit, u32}
+
 import gleam/bit_array
 import gleam/float
 import gleam/int
@@ -6,28 +7,6 @@ import gleam/list
 import gleam/result
 import gleam/string
 import gleam_community/maths
-
-const bitmask = 0xFFFFFFFF
-
-fn u32(x: Int) -> Int {
-  int.bitwise_and(x, bitmask)
-}
-
-fn leftrotate_32bit(x, c) {
-  let x = int.bitwise_and(x, bitmask)
-
-  let left = int.bitwise_shift_left(x, c)
-  let right =
-    int.bitwise_shift_right(x, 32 - c)
-    |> int.bitwise_and(bitmask)
-
-  int.bitwise_or(left, right)
-  |> int.bitwise_and(bitmask)
-}
-
-fn add32(a: Int, b: Int) -> Int {
-  u32(a + b)
-}
 
 pub fn compute_table() {
   let two32 = 4_294_967_296.0

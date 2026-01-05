@@ -27,10 +27,6 @@ var s = [64]uint32{
 	6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21,
 }
 
-func leftRotate(x uint32, c uint32) uint32 {
-	return (x << c) | (x >> (32 - c))
-}
-
 func Md5(array *bitutil.BitArray) (string, error) {
 
 	messageChunks, err := preprocessBytes(array).Split(512)
@@ -83,7 +79,7 @@ func Md5(array *bitutil.BitArray) (string, error) {
 			a = d
 			d = c
 			c = b
-			b = b + leftRotate(f, s[i])
+			b = b + bitutil.LeftRotate(f, s[i])
 		}
 
 		a0 += a

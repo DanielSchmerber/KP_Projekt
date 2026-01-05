@@ -2,9 +2,26 @@
 
 This is a small CLI tool, to create MD5 hashes of either Strings or Files.
 
-Usage: 
+# Usage: 
     -s <string> -> returns the MD5 hash of the passed string
     -f <path> -> returns the MD5 hash of a given file
+    -i -> interactive mode
+    -h -> prints help message
+    -b -> benchmarks the tool (only in gleam)
+
+
+# Structure
+Both glem and go are structured simular
+
+the main file (md5.gleam / main.go) contain all the logic to parse the commandline arguments
+
+the algorithm file, contains the md5 hashing algorithm
+
+bitutil contains code, that implements bitwise functionalities, required for the algorithms
+
+# Flow
+The flow of the programm can be visualized like this
+![Program flow diagram](flowdiagram.png)
 
 # Gleam
 

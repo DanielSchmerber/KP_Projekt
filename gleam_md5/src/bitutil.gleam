@@ -1,6 +1,8 @@
 import gleam/bit_array
 import gleam/int
 import gleam/list
+import gleam_community/maths
+import gleam/float
 
 pub type Bit512 {
   Bit512(array: BitArray)
@@ -62,3 +64,24 @@ fn split_32bit_ints(bits: BitArray, acc: List(Int)) -> List(Int) {
     _ -> list.reverse(acc)
   }
 }
+const bitmask = 0xFFFFFFFF
+pub fn u32(x: Int) -> Int {
+  int.bitwise_and(x, bitmask)
+}
+
+pub fn leftrotate_32bit(x, c) {
+  let x = int.bitwise_and(x, bitmask)
+
+  let left = int.bitwise_shift_left(x, c)
+  let right =
+    int.bitwise_shift_right(x, 32 - c)
+    |> int.bitwise_and(bitmask)
+
+  int.bitwise_or(left, right)
+  |> int.bitwise_and(bitmask)
+}
+
+pub fn add32(a: Int, b: Int) -> Int {
+  u32(a + b)
+}
+
