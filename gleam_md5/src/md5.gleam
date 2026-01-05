@@ -4,6 +4,7 @@ import gleam/bit_array
 import gleam/io
 import gleam/string
 import gleamy/bench
+import input
 import simplifile
 
 pub fn main() {
@@ -46,9 +47,29 @@ pub fn main() {
       io.print("Measured in ms")
     }
 
+    ["-i", ..] | ["--interactive"] -> {
+      start_interactive_mode()
+    }
+
     _ ->
       io.println(
-        "Usages:\n  gleam run -- -f/--file <file>\n  gleam run -- -s/--string <string> \n  gleam run -- -b/--benchmark",
+        "Usages:\n  gleam run -- -f/--file <file>\n  gleam run -- -s/--string <string> \n  gleam run -- -b/--benchmark\n   gleam run -- -i/--interactive",
       )
+  }
+}
+
+fn start_interactive_mode() {
+  io.println("Write quit or exit to exit interactive mode")
+  let assert Ok(line) = input.input(prompt: "Enter your string: ")
+
+  case line {
+    "quit" | "exit" -> {
+      io.println("Goodbye!")
+    }
+
+    s -> {
+      io.println(algorithm.md5(bit_array.from_string(s)))
+      start_interactive_mode()
+    }
   }
 }
