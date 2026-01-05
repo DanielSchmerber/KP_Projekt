@@ -51,11 +51,17 @@ pub fn main() {
       start_interactive_mode()
     }
 
-    _ ->
-      io.println(
-        "Usages:\n  gleam run -- -f/--file <file>\n  gleam run -- -s/--string <string> \n  gleam run -- -b/--benchmark\n   gleam run -- -i/--interactive",
-      )
+    _ -> print_help_text()
   }
+}
+
+pub fn print_help_text() {
+  io.println("Usages:")
+  io.println("  -s, --string <string>     Convert string to MD5")
+  io.println("  -f, --file <file>         Convert file contents to MD5")
+  io.println("  -b, --benchmark           Run benchmarks")
+  io.println("  -i, --interactive         Start interactive mode")
+  io.println("  -h, --help                Show this help message")
 }
 
 fn start_interactive_mode() {

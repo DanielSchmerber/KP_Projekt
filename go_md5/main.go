@@ -12,6 +12,7 @@ func main() {
 
 	name := flag.String("s", "", "Convert string")
 	filePath := flag.String("f", "", "Convert file path")
+	help := flag.Bool("h", false, "Prints help message")
 	interactiveMode := flag.Bool("i", false, "Start interactive mode")
 
 	flag.Parse()
@@ -21,8 +22,13 @@ func main() {
 		return
 	}
 
+	if *help {
+		printHelpText()
+		return
+	}
+
 	if (*name != "" && *filePath != "") || *name == *filePath {
-		println("Usage: -s=\"string\" , -f=\"file path\", -i ")
+		printHelpText()
 		return
 	}
 
@@ -49,6 +55,14 @@ func main() {
 	}
 
 	println(result)
+}
+
+func printHelpText() {
+	println("Usages:")
+	println(" -s=\"string\" - Convert string to md5")
+	println(" -f=\"file path\" - Convert file path to md5")
+	println(" -h - Prints help message")
+	println(" -i - Start interactive mode")
 }
 
 func startInteractiveMode() {
