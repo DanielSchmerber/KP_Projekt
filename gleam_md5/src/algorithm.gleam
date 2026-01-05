@@ -41,7 +41,7 @@ pub fn compute_table() {
   })
 }
 
-pub fn md5(bits: BitArray) -> String {
+fn preprocess_bits_and_chunk(bits: BitArray) {
   let original_length = bit_array.bit_size(bits)
   let bits = bit_array.append(bits, <<1:1>>)
   let length_mod_512 = bit_array.bit_size(bits) % 512
@@ -49,7 +49,6 @@ pub fn md5(bits: BitArray) -> String {
   let bits = bit_array.append(bits, <<0:size(pad_bits)>>)
   let length_padding = <<original_length:little-size(64)>>
   let bits = bit_array.append(bits, length_padding)
-
   let blocks =
     bitutil.chunk_messages(bits, 512)
     |> list.map(bitutil.from_bitarray)
@@ -59,6 +58,10 @@ pub fn md5(bits: BitArray) -> String {
         _ -> panic as "Could not split bit array (this should not happen)"
       }
     })
+}
+
+pub fn md5(bits: BitArray) -> String {
+  let blocks = preprocess_bits_and_chunk(bits)
 
   let ktable = compute_table()
 
@@ -167,6 +170,16 @@ fn get(arr, index) {
     0, [el, ..] -> Ok(el)
     _, [_, ..rest] -> get(rest, index - 1)
     _, _ -> Error("Index out of bound")
+  }
+}
+
+pub fn set(messages: List(a), index: Int, value: a) -> List(a) {
+  case messages, index {
+    _, i if i < 0 -> messages
+    [], 0 -> [value]
+    [], _ -> []
+    [_, ..rest], 0 -> [value, ..rest]
+    [head, ..rest], i -> [head, ..set(rest, i - 1, value)]
   }
 }
 
