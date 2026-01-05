@@ -53,7 +53,6 @@ Run the cli with the --benchmark flag
 - Go (https://go.dev/dl/)
 
 ## Run Project:
-- Download Dependencies (if missing): go mod download
 - Run: go run .
 
 ## Test Project:
